@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Atharva · Admin</title>
+<link rel="icon" type="image/png" href="/admin/favicon.png">
+<link rel="preload" href="/fonts/42dot-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/42dot-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <!-- ============ Login ============ -->
+  <main class="login" id="login" hidden>
+    <img class="login-avatar" src="/admin/avatar.jpg" alt="" width="96" height="96">
+    <h1>Atharva</h1>
+    <p class="sub">Sign in to your dashboard</p>
+    <form id="login-form" class="field" autocomplete="on">
+      <input type="password" id="password" name="password" placeholder="password" autocomplete="current-password" aria-label="Password" required>
+      <button type="submit" class="icon-btn" aria-label="Sign in">
+        <svg viewBox="0 0 24 24"><path d="M3 3.5 21.5 12 3 20.5l2.6-8.5L3 3.5Z" fill="currentColor"/></svg>
+      </button>
+    </form>
+    <p class="error" id="login-error" role="alert"></p>
+    <a class="back" href="/">← back to site</a>
+  </main>
+
+  <!-- ============ Inbox ============ -->
+  <div class="app" id="app" hidden>
+    <header class="top">
+      <a class="brand" href="/" target="_blank" rel="noopener" title="Open your site"><img class="brand-avatar" src="/admin/avatar.jpg" alt="" width="36" height="36"><span class="brand-text">Atharva</span></a>
+      <nav class="views" role="tablist" aria-label="Admin sections">
+        <button class="view-tab is-active" data-view="chats" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5v-9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span>Chats</span><span class="badge" id="unread-badge" hidden>0</span>
+        </button>
+        <button class="view-tab" data-view="work" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="9.5" r="1.8" fill="currentColor"/><path d="m4 18 5.5-5.5 4 4L16 14l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span>Work</span><span class="count" id="work-count"></span>
+        </button>
+        <button class="view-tab" data-view="settings" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2 5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+      <div class="actions">
+        <button class="pill ghost" id="notify-btn" hidden>Enable alerts</button>
+        <a class="pill ghost" href="/" target="_blank" rel="noopener">View site</a>
+        <button class="pill" id="logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <div class="panes" id="panes">
+      <!-- list of conversations -->
+      <aside class="side">
+        <div class="side-tools">
+          <label class="search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="search" id="search" placeholder="search chats" aria-label="Search chats">
+          </label>
+          <div class="tabs" role="tablist">
+            <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">All <span id="count-all"></span></button>
+            <button class="tab" data-filter="unread" role="tab" aria-selected="false">Unread <span id="count-unread"></span></button>
+          </div>
+        </div>
+        <ul class="convs" id="convs"></ul>
+        <div class="side-empty" id="side-empty" hidden></div>
+      </aside>
+
+      <!-- open conversation -->
+      <section class="pane" id="pane">
+        <div class="pane-empty" id="pane-empty">
+          <img class="pe-avatar" src="/admin/avatar.jpg" alt="" width="84" height="84">
+          <p class="pe-title" id="pe-greeting">Welcome back, Atharva</p>
+          <div class="stats" id="stats">
+            <div class="stat"><b id="st-total">0</b><span>chats</span></div>
+            <div class="stat accent"><b id="st-unread">0</b><span>waiting for reply</span></div>
+            <div class="stat"><b id="st-today">0</b><span>active today</span></div>
+          </div>
+          <p class="pe-sub">Pick a chat on the left to reply. Visitors see your reply live on their chat page.</p>
+          <p class="pe-keys"><kbd>/</kbd> search &nbsp;·&nbsp; <kbd>Esc</kbd> close chat &nbsp;·&nbsp; <kbd>Enter</kbd> send</p>
+        </div>
+
+        <div class="conv" id="conv" hidden>
+          <div class="conv-head">
+            <button class="back-btn" id="back-btn" aria-label="Back to chats">
+              <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="who-avatar" id="who-avatar"></span>
+            <div class="who">
+              <p class="who-name" id="who-name"></p>
+              <p class="who-contact"><span id="who-contact"></span><button type="button" class="copy" id="copy-contact" title="Copy contact">Copy</button></p>
+              <p class="who-meta" id="who-meta"></p>
+            </div>
+            <div class="conv-actions">
+              <span class="reach" id="reach"></span>
+              <button class="mini" id="unread-btn">Mark unread</button>
+              <button class="mini danger" id="delete-btn">Delete</button>
+            </div>
+          </div>
+
+          <div class="msgs" id="msgs" aria-live="polite"></div>
+
+          <div class="quick" id="quick" aria-label="Quick replies"></div>
+          <form class="reply" id="reply" autocomplete="off">
+            <textarea id="reply-input" rows="1" maxlength="2000" placeholder="write a reply" aria-label="Reply"></textarea>
+            <button type="submit" class="icon-btn send" aria-label="Send reply">
+              <svg viewBox="0 0 24 24"><path d="M3 3.5 21.5 12 3 20.5l2.6-8.5L3 3.5Z" fill="currentColor"/></svg>
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ Work: images under "Services we provide" ============ -->
+    <section class="work-view" id="work" hidden>
+      <div class="wv-inner">
+        <div class="wv-head">
+          <div>
+            <h2>Work images</h2>
+            <p class="set-sub">The pictures shown under "Services we provide". Drag to reorder, add a caption and an optional link to the live project. Changes are live instantly.</p>
+          </div>
+          <button class="pill ghost" id="works-reset">Restore originals</button>
+        </div>
+
+        <label class="drop" id="drop">
+          <input type="file" id="work-file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden>
+          <span class="drop-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0-4.5 4.5M12 4l4.5 4.5M4 16v2.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="drop-title">Add images</span>
+          <span class="drop-sub">Click to choose or drop files here · JPG, PNG, WebP · tall screenshots look best</span>
+        </label>
+        <div class="uploads" id="uploads"></div>
+
+        <ol class="wlist" id="wlist"></ol>
+        <p class="wempty" id="wempty" hidden>No images. The row is hidden on your site until you add some.</p>
+      </div>
+    </section>
+
+    <!-- ============ Settings: contact details shown on the site ============ -->
+    <section class="settings" id="settings" hidden>
+      <form class="set-card" id="settings-form" novalidate autocomplete="off">
+        <h2>Contact details</h2>
+        <p class="set-sub">These power the Call, WhatsApp, Mail and Instagram buttons on your site. Changes go live as soon as you save. Leave a field empty to hide that button.</p>
+
+        <label class="sf" data-k="phone">
+          <span class="sf-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z" fill="currentColor"/></svg></span>
+          <span class="sf-body">
+            <span class="sf-label">Phone <small>for the Call button</small></span>
+            <input name="phone" type="tel" inputmode="tel" placeholder="+91 98765 43210" maxlength="30">
+            <em class="sf-err"></em>
+          </span>
+          <a class="sf-test" target="_blank" rel="noopener" hidden>Test</a>
+        </label>
+
+        <label class="sf" data-k="whatsapp">
+          <span class="sf-icon"><svg viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.6 7.3c.3-.4.6-.4.9-.4h.6c.2 0 .4.1.5.4l.8 1.9c.1.2 0 .5-.1.7l-.6.7c-.2.2-.2.4 0 .6a7 7 0 0 0 3.2 2.8c.2.1.5.1.6-.1l.8-.9c.2-.2.4-.3.7-.2l1.8.9c.3.1.4.3.4.6 0 .5-.2 1.3-.9 1.8-.7.5-1.8.7-3.4.1a11 11 0 0 1-5.3-4.8c-.6-1.2-.7-2.4 0-3.3Z" fill="currentColor"/></svg></span>
+          <span class="sf-body">
+            <span class="sf-label">WhatsApp <small>number with country code</small></span>
+            <input name="whatsapp" type="tel" inputmode="tel" placeholder="91 98765 43210" maxlength="40">
+            <em class="sf-err"></em>
+          </span>
+          <a class="sf-test" target="_blank" rel="noopener" hidden>Test</a>
+        </label>
+
+        <label class="sf" data-k="email">
+          <span class="sf-icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <span class="sf-body">
+            <span class="sf-label">Email <small>for the Mail button</small></span>
+            <input name="email" type="email" inputmode="email" placeholder="you@example.com" maxlength="120">
+            <em class="sf-err"></em>
+          </span>
+          <a class="sf-test" target="_blank" rel="noopener" hidden>Test</a>
+        </label>
+
+        <label class="sf" data-k="instagram">
+          <span class="sf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></span>
+          <span class="sf-body">
+            <span class="sf-label">Instagram <small>username or profile link</small></span>
+            <input name="instagram" type="text" autocapitalize="off" spellcheck="false" placeholder="your.username" maxlength="120">
+            <em class="sf-err"></em>
+          </span>
+          <a class="sf-test" target="_blank" rel="noopener" hidden>Test</a>
+        </label>
+
+        <div class="set-actions">
+          <span class="set-status" id="set-status"></span>
+          <button type="button" class="pill ghost" id="set-reset">Undo changes</button>
+          <button type="submit" class="pill" id="set-save">Save</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

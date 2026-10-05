@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Chat · Atharva Goim</title>
+<meta name="description" content="Your private chat with Atharva Goim.">
+<link rel="preload" href="fonts/42dot-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/42dot-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>try{if(sessionStorage.getItem("navKeep")){document.documentElement.classList.add("nav-static");sessionStorage.removeItem("navKeep")}}catch(e){}</script>
+
+</head>
+<body class="page-chat">
+
+<!-- same nav, same position as Home / About -->
+<header class="frame chat-top in-view" style="--h:140">
+  <div class="stage">
+    <nav class="nav">
+      <a href="index.html" class="nav-link muted">Home</a>
+      <a href="about.html" class="nav-link muted">About</a>
+      <a href="contact.html" class="nav-link muted">Contact</a>
+      <a href="extras.html" class="nav-link muted">Extras</a>
+    </nav>
+  </div>
+</header>
+
+<main class="chat">
+  <div class="chat-head">
+    <div>
+      <h1>Chat with Atharva</h1>
+      <p class="chat-sub" id="chat-sub">I usually reply within a few hours. Your chat is saved on this device.</p>
+    </div>
+    <button class="chat-new" id="chat-new" hidden>New chat</button>
+  </div>
+
+  <div class="thread" id="thread" aria-live="polite"></div>
+
+  <div class="chat-empty" id="chat-empty" hidden>
+    <p class="ce-title">Start a conversation</p>
+    <p class="ce-sub">Type below. Your messages and my replies will show up here.</p>
+  </div>
+
+  <form class="composer" id="composer" autocomplete="off">
+    <textarea id="composer-input" rows="1" maxlength="2000" placeholder="type your message here" aria-label="Your message"></textarea>
+    <button type="submit" class="send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" width="30" height="30"><path d="M3 3.5 21.5 12 3 20.5l2.6-8.5L3 3.5Z" fill="currentColor"/></svg>
+    </button>
+  </form>
+</main>
+
+<script src="script.js"></script>
+<script src="chat.js"></script>
+</body>
+</html>

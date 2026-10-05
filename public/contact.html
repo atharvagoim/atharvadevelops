@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · Atharva Goim</title>
+<meta name="description" content="Contact Atharva Goim for websites, portfolios, e-commerce stores, custom apps and AI agents.">
+<link rel="preload" href="fonts/42dot-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/42dot-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script>try{if(sessionStorage.getItem("navKeep")){document.documentElement.classList.add("nav-static");sessionStorage.removeItem("navKeep")}}catch(e){}</script>
+
+</head>
+<body class="page-contact">
+
+<section class="frame" id="contact" style="--h:1080">
+  <div class="stage">
+    <nav class="nav">
+      <a href="index.html" class="nav-link muted">Home</a>
+      <a href="about.html" class="nav-link muted">About</a>
+      <a href="contact.html" class="nav-link" aria-current="page">Contact</a>
+      <a href="extras.html" class="nav-link muted">Extras</a>
+    </nav>
+
+    <div class="contact-wrap" id="contact-wrap">
+      <!-- left -->
+      <div class="ct-left">
+        <h1 class="ct-title"><span class="line">Lets build</span><span class="line">something</span><span class="line">together !</span></h1>
+        <p class="ct-sub">Tell me about your website, portfolio, store, app or <br>AI agent idea. I usually reply within a few hours.</p>
+        <div class="ct-tiles" id="cd-list">
+          <a class="ct-tile t-phone" data-contact="phone" href="#" aria-label="Call" title="Call" hidden><img class="tile-img" data-icon="phone" alt=""><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z" fill="currentColor"/></svg></a>
+          <a class="ct-tile t-whatsapp" data-contact="whatsapp" href="#" aria-label="WhatsApp" title="WhatsApp" hidden target="_blank" rel="noopener"><img class="tile-img" data-icon="whatsapp" alt=""><svg viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.6 7.3c.3-.4.6-.4.9-.4h.6c.2 0 .4.1.5.4l.8 1.9c.1.2 0 .5-.1.7l-.6.7c-.2.2-.2.4 0 .6a7 7 0 0 0 3.2 2.8c.2.1.5.1.6-.1l.8-.9c.2-.2.4-.3.7-.2l1.8.9c.3.1.4.3.4.6 0 .5-.2 1.3-.9 1.8-.7.5-1.8.7-3.4.1a11 11 0 0 1-5.3-4.8c-.6-1.2-.7-2.4 0-3.3Z" fill="currentColor"/></svg></a>
+          <a class="ct-tile t-instagram" data-contact="instagram" href="#" aria-label="Instagram" title="Instagram" hidden target="_blank" rel="noopener"><img class="tile-img" data-icon="instagram" alt=""><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg></a>
+          <a class="ct-tile t-email" data-contact="email" href="#" aria-label="Email" title="Email" hidden><img class="tile-img" data-icon="email" alt=""><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- right: message card -->
+      <form class="ct-card" id="ct-form" novalidate autocomplete="on">
+        <div class="ct-card-head">
+          <h2>send a message</h2>
+        </div>
+        <label class="cf" data-f="name">
+          <span>Full name</span>
+          <input name="name" maxlength="60" autocomplete="name" placeholder="e.g. Priya sharma">
+          <em></em>
+        </label>
+        <label class="cf" data-f="contact">
+          <span>Email or Phone</span>
+          <input name="contact" maxlength="120" autocomplete="email" placeholder="So I can reach out to you">
+          <em></em>
+        </label>
+        <label class="cf cf-msg" data-f="message">
+          <textarea name="message" maxlength="2000" placeholder="Type your message here" aria-label="Message"></textarea>
+          <em></em>
+        </label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="ct-error" id="ct-error" role="alert"></p>
+        <div class="ct-actions">
+          <button type="submit" class="ct-send"><span>Send</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3.5 21.5 12 3 20.5l2.6-8.5L3 3.5Z" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <!-- bottom: back to an earlier chat -->
+      <div class="ct-bottom">
+        <a class="ct-prev" id="ct-prev" href="chat.html" hidden>
+          <svg class="cp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A1.5 1.5 0 0 1 4 14.5v-9Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+          <span>Previous chat</span>
+          <i class="cp-new" id="cp-new" hidden>new reply</i>
+          <svg class="cp-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>
